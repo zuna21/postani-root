@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+        <!-- naslov -->
+        <div class="title">
+            <h1 class="title-text">{{article.title}}</h1>
+            <h3 class="title-text">{{article.category}}</h3>
+        </div>
+
+        <div class="content container">
+            <p>{{article.body|safe}}</p>
+          </div>
+
+
+{% endblock content %}
