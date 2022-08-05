@@ -2,12 +2,19 @@
 
 {% block content %}
 
-<h1>REGISTRUJ SE</h1>
-<form action="{% url 'register' %}" method="POST">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Registruj se">
-<p>Već imaš profil? <a href="{% url 'login' %}">Prijavi se!</a></p>
-</form>
+<main class="form-signin w-100 m-auto">
+    <form action="{% url 'register' %}" method="POST">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 fw-normal">Registracija korisnika</h1>
+
+      <div class="form-floating">
+        {{form.as_p}}
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Registruj se</button>
+      <p>Već imaš profil? <a href="{% url 'login' %}">Prijavi se!</a></p>
+    </form>
+  </main>
+
 
 {% endblock content %}

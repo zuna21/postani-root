@@ -2,12 +2,25 @@
 
 {% block content %}
 
-<form action="{% url 'login' %}" method="POST">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Korisničko ime" />
-    <input type="password" name="password" placeholder="Lozinka" />
-    <input type="submit" value="Login">
-    <p>Nemaš profil? <a href="{% url 'register' %}">Registruj se!</a></p>
-</form>
+
+<main class="form-signin w-100 m-auto">
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 fw-normal">Dobrodošli</h1>
+  
+      <div class="form-floating">
+        <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Korisničko ime">
+        <label for="floatingInput">Korisničko ime</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Lozinka">
+        <label for="floatingPassword">Lozinka</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Prijavi se</button>
+      <p>Nemaš profil? <a href="{% url 'register' %}">Registruj se!</a></p>
+    </form>
+  </main>
+
 
 {% endblock content %}
