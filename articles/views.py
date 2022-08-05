@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Article, Category
-from .forms import ArticleForm
+from .forms import ArticleForm, CommentForm
 from .utils import searchArticles, searchInCategory, paginationArticles
 
 # Create your views here.
@@ -23,9 +24,24 @@ def articles(request):
 
 
 def article(request, pk):
-    article = Article.objects.get(id=pk)
-    context = {'article': article}
+    form = CommentForm()
+    articleObj = Article.objects.get(id=pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        comment = form.save(commit=False)
+        comment.article = articleObj
+        comment.owner = request.user.profile
+        comment.save()
+        messages.success(request, 'Uspješno ste objavili komentar!')
+        return redirect('article', pk=articleObj.id)
+
+    context = {
+        'article': articleObj,
+        'form': form
+        }
     return render(request, 'articles/article.html', context)
+
 
 
 @login_required(login_url='articles')

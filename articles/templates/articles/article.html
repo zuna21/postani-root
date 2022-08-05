@@ -12,5 +12,27 @@
             <p>{{article.body|safe}}</p>
           </div>
 
+        <hr>
+        <h2>Ostavi svoj komentar:</h2>
+        {% if request.user.is_authenticated %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Objavi" />
+        </form>
+        {% else %}
+        <p>Da bi ostavili svoj komentar morate se prijaviti.</p>
+        <a class="btn btn-outline-warning btn-lg" href="{% url 'login' %}">Prijavi se</a>
+        {% endif %}
+
+
+
+        <hr>
+        <h2>Komentari: </h2>
+
+        {% for comment in article.comments.all %}
+          <strong>{{comment.owner}}</strong>
+          <p>{{comment.body | linebreaksbr}}</p>
+        {% endfor %}
 
 {% endblock content %}
