@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from .models import Article, Category
 from .forms import ArticleForm, CommentForm
@@ -44,7 +45,7 @@ def article(request, pk):
 
 
 
-@login_required(login_url='articles')
+@staff_member_required(login_url='articles')
 def createArticle(request):
     form = ArticleForm()
     if request.method == 'POST':

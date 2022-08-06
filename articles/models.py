@@ -1,3 +1,4 @@
+from importlib.metadata import requires
 from django.db import models
 import uuid
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -34,7 +35,7 @@ class Article(models.Model):
 class Comment(models.Model):
     article = models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE, blank=True, null=True)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True, null=True)
-    body = models.TextField(null=True, blank=True)
+    body = models.TextField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, primary_key=True)
 

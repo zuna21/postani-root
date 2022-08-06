@@ -71,3 +71,23 @@ body{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+
+/* za komentare */
+.comment{
+    border: 2px solid #ced119;
+    max-width: 500px;
+    margin: 0.8rem;
+}
+
+.comment-header{
+    background-color: #61c746;
+    padding-left: 2rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+}
+
+.comment-body{
+    padding: 1rem;
+    background-color: #8dd17b;
+}
