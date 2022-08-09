@@ -35,6 +35,9 @@ def logoutUser(request):
 
 
 def registerUser(request):
+    if request.user.is_authenticated:
+        return redirect('articles')
+
     form = CustomUserCreationForm
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)

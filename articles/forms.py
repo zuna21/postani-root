@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Article, Comment
+from .models import Article, Comment, Reply
 
 class ArticleForm(ModelForm):
     class Meta:
@@ -13,4 +13,14 @@ class CommentForm(ModelForm):
 
         labels = {
             'body': 'Ostavite svoj komentar...'
+        }
+
+
+class ReplyForm(ModelForm):
+    class Meta:
+        model = Reply
+        fields = ['body']
+
+        labels = {
+            'body': 'Odgovorite...'
         }

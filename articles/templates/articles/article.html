@@ -29,10 +29,8 @@
           {% endif %}
         </div>
 
-
-
-
         <hr>
+        
         <div class="container">
           <h2>Komentari: </h2>
           <br>
@@ -54,9 +52,30 @@
             </div>
             <div class="comment-body">
               <p>{{comment.body | linebreaksbr}}</p>
+              <a href="{% url 'reply' comment.id %}" class="btn btn-outline-primary">Odgovori</a>
             </div>
           </div>
+          {% for reply in comment.replies.all %}
+            <!-- odgovor -->
+            <div class="comment reply">
+              <div class="comment-header reply-header">
+                <div class="row">
+                  <div class="col-6">
+                    <h5 style="margin-bottom: 0;">{{reply.owner}}</h5>
+                  </div>
+                  <div class="col-6" style="text-align: right;">
+                    <p>{{reply.created}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="comment-body reply-body">
+                <p>{{reply.body}}</p>
+                <a href="{% url 'reply' comment.id %}" class="btn btn-outline-primary">Odgovori</a>
+              </div>
+            </div>
           {% endfor %}
+          {% endfor %}
+
         </div>
 
 

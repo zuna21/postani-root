@@ -1,9 +1,10 @@
+from xml.etree.ElementTree import Comment
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
-from .models import Article, Category
-from .forms import ArticleForm, CommentForm
+from .models import Article, Category, Comment
+from .forms import ArticleForm, CommentForm, ReplyForm
 from .utils import searchArticles, searchInCategory, paginationArticles
 
 # Create your views here.
@@ -80,3 +81,25 @@ def category(request, pk):
 
 def about(request):
     return render(request, 'articles/about.html')
+
+
+def reply(request, pk):
+    comment = Comment.objects.get(id=pk)
+    form = ReplyForm()
+    if request.method == 'POST':
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            reply = form.save(commit=False)
+            reply.owner = request.user.profile
+            reply.comment = comment
+            reply.save()
+            messages.success(request, 'Uspješno ste odgovorili na komentar!')
+            return redirect('article', pk=comment.article.id)
+
+
+    context = {
+        'comment': comment,
+        'form': form,
+    }
+
+    return render(request, 'articles/reply.html', context)

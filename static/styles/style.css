@@ -91,3 +91,20 @@ body{
     padding: 1rem;
     background-color: #8dd17b;
 }
+
+.btn-potrazi {
+    margin-right: 0.5rem;
+}
+
+/* za odgovore */
+.reply {
+    margin-left: 5rem;
+}
+
+.reply-header {
+    background-color: #e8d631;
+}
+
+.reply-body{
+    background-color: #e3d76d;
+}

@@ -44,3 +44,14 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+
+class Reply(models.Model):
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True, null=True)
+    comment = models.ForeignKey(Comment, related_name='replies', on_delete=models.CASCADE, blank=True, null=True)
+    body = models.TextField(null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, primary_key=True)
+
+    def __str__(self):
+        return '%s - %s' % (self.comment.article.title, self.owner)

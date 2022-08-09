@@ -12,4 +12,6 @@ urlpatterns = [
     path('about', views.about, name='about'),
 
     path('create-article/', views.createArticle, name='create-article'),
+
+    path('reply/<str:pk>/', views.reply, name='reply'),
 ]
